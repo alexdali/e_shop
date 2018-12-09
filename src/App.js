@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Nav from './Nav';
+import ItemPage from './ItemPage';
+import {items} from './static-data';
+
 import './App.css';
 
+
 class App extends Component {
+  state = {
+    activeTab: 0
+  };
+
+  handleTabChange = (index) => {
+    this.setState({
+      activeTab: index
+    });
+  }
+
+  renderContent() {
+    switch(this.state.activeTab) {
+      default:
+      case 0: 
+        return (
+          <span><ItemPage items={items}/></span>
+        );
+      case 1: return <span>Cart</span>;
+    }
+  }
+
   render() {
+    let {activeTab} = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Nav
+          activeTab={activeTab}
+          onTabChange={this.handleTabChange}
+          items={items}
+        />
+        <main className="App-content">
+          {this.renderContent()}
+        </main>
       </div>
     );
   }
