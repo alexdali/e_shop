@@ -27,3 +27,15 @@ border-right: none;
 	padding: 10px;
 	justify-content: flex-end;
 }
+.CartPage-Empty {
+	font-size: 26px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: #555;
+	justify-content: center;
+	margin-top: 100px;
+}
+.CartPage-Empty div {
+	margin: 10px;
+}

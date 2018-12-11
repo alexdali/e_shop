@@ -59,11 +59,15 @@ class App extends Component {
     });
 
     // count Total
-    let totalPrice = cartItems.map(itemCart => 
-                                       (itemCart.price * itemCart.count)
-                      ).reduce((summPrice, TotalPriceItem) => {
-      return summPrice + TotalPriceItem;
-    });
+
+    let totalPrice = 0;
+    if(cartItems.length>0) {
+        totalPrice = cartItems.map(itemCart => 
+                                             (itemCart.price * itemCart.count)
+                            ).reduce((summPrice, TotalPriceItem) => {
+              return summPrice + TotalPriceItem;
+            });
+    }
 
     return (
       <CartPage
