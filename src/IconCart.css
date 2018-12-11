@@ -1,0 +1,19 @@
+.IconCart {
+	margin-top: 12px;
+	/*padding: 5px;*/
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	font-size: 12px;
+	color: #555;
+}
+.IconCart-item {
+	margin: 0 2px;
+}
+.IconCart a {
+	display: flex;
+	cursor: pointer;
+}
+.IconCart a:hover {
+color: #999;
+}

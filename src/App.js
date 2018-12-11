@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Nav from './Nav';
 import ItemPage from './ItemPage';
 import CartPage from './CartPage';
+import IconCart from './IconCart';
 import {items} from './static-data';
 
 import './App.css';
@@ -32,7 +33,7 @@ class App extends Component {
     //console.log('indexItem ', indexItem);
     this.setState(     
         { 
-          cart:  indexItem != -1 ? 
+          cart:  indexItem !== -1 ? 
                   cart.map((el,index) => {
                       return (index === indexItem ? 
                         { ...el, count: ++el.count, totalPrice: el.count * el.price } 
@@ -139,13 +140,48 @@ class App extends Component {
   //     case 1: return  this.renderCart();
   //   }
   // }
-  renderContent() {
+
+  SummPriceCart = () => {
     const {cart} = this.state;
     let totalPriceCart = cart.length>0 ? 
         cart.reduce((totalPriceCart, item) => {
               return totalPriceCart + item.totalPrice;
-            })
+            }, 0)
         : 0;
+    return totalPriceCart;
+  }
+
+  CountItemsCart = () => {
+    const {cart} = this.state;
+    let totalCountItems = cart.length>0 ? 
+        cart.reduce((totalCountItems, item) => {
+              return totalCountItems + item.count;
+            }, 0)
+        : 0;
+    return totalCountItems;
+  }
+
+  renderIconCart() {
+    //const {cart} = this.state;
+    let totalCountCart = this.CountItemsCart();
+    let totalPriceCart = this.SummPriceCart();
+    if (totalCountCart>0) {
+      return (
+              <IconCart
+                countItems={totalCountCart}
+                totalPriceCart={totalPriceCart}
+                onTabChange={this.handleTabChange}
+              />
+             );
+    }
+
+    return null;
+  }
+
+  renderContent() {
+    const {cart} = this.state;
+    let totalPriceCart = this.SummPriceCart();
+    //console.log('App totalPriceCart - ', totalPriceCart);
     switch(this.state.activeTab) {
       default:
       case 0: return <ItemPage
@@ -163,14 +199,17 @@ class App extends Component {
 
   render() {
     let {activeTab } = this.state;
-
+    
+    //console.log('App countItemsCart - ', countItemsCart);
     return (
       <div className="App">
         <Nav
           activeTab={activeTab}
           onTabChange={this.handleTabChange}
           items={items}
-        />
+        >
+          {this.renderIconCart()}
+        </Nav>
         <main className="App-content">
           {this.renderContent()}
         </main>

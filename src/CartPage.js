@@ -5,7 +5,7 @@ import './CartPage.css';
 import Item from './Item';
 
 function CartPage({ items, onAddOne, onRemoveOne, totalPriceCart }) {
-	//console.log(items.length);
+	//console.log('totalPriceCart - ', totalPriceCart);
 	//if (true) {return <div>Your cart is empty</div>};
 	return (
 			<>	
@@ -36,7 +36,7 @@ function CartPage({ items, onAddOne, onRemoveOne, totalPriceCart }) {
 				</ul>
 				{
 					(
-						totalPriceCart != 0 &&
+						totalPriceCart !== 0 &&
 						<div className = 'CartPage-totalPrice'>
 							Total: ${totalPriceCart}
 						</div>
