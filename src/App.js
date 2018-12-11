@@ -50,7 +50,7 @@ class App extends Component {
       var item = items.find(item =>
           item.id === parseInt(itemId, 10)
       );
-
+      
       // Create a new "item" and add the 'count' property
       return {
         ...item,
@@ -58,11 +58,19 @@ class App extends Component {
       }
     });
 
+    // count Total
+    let totalPrice = cartItems.map(itemCart => 
+                                       (itemCart.price * itemCart.count)
+                      ).reduce((summPrice, TotalPriceItem) => {
+      return summPrice + TotalPriceItem;
+    });
+
     return (
       <CartPage
         items={cartItems}
         onAddOne={this.handleAddToCart}
         onRemoveOne={this.handleRemoveOne}
+        totalPriceCart={totalPrice}
       />
     );
   }

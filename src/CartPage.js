@@ -4,8 +4,9 @@ import './CartPage.css';
 
 import Item from './Item';
 
-function CartPage({ items, onAddOne, onRemoveOne }) {
+function CartPage({ items, onAddOne, onRemoveOne, totalPriceCart }) {
 	return (
+		<>
 		<ul className = 'CartPage-items'>
 			{items.map(item => 
 				<li key={item.id} className='CartPage-item'>
@@ -31,6 +32,8 @@ function CartPage({ items, onAddOne, onRemoveOne }) {
 				</li>
 			)}
 		</ul>
+		<div className = 'CartPage-totalPrice'>Total: ${totalPriceCart}</div>
+		</> 
 	);
 }
 
